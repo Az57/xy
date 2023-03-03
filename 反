@@ -1,0 +1,249 @@
+ --区域AUTO_UPDATER
+地方的当前版本（_V）= &#34; two point two &#34;
+地方的上次版本=网址：http获取 ( &#34;https://raw.githubusercontent.com/MN1R/TheBleeding/main/AntiAimVersion &#34; )
+ --使用我们的版本写入文件以删除随机格式的tonumber、string.gsub
+地方的最新版本文件名= &#34;出血_最新版本.txt &#34;
+文件写入（最新版本文件名， 转换为字符串（最后一个版本）
+ --从文件中获取数据，其100%字符串
+地方的打开文件（_O）=文件正常开放（最新版本文件名， &#39;第页 &#39; )
+地方的文件_数据=打开文件（_O）：阅读 ()
+打开文件（_O）：关闭 ()
+ --没有任何模因的完整血管
+上次版本=字符串.sub（文件数据， zero ,字符串.len（当前版本）；
+ --删除文件
+文件删除（最新版本文件名）
+ --如果lua已经过时
+如果上次版本~=当前版本（_V）然后
+打印 ( &#34;Lua已经过时了 &#34; )
+ --获取最新数据
+地方的最后LUA_DATA=网址：http获取 ( &#34;https://raw.githubusercontent.com/MN1R/TheBleeding/main/AntiAimsCode &#34; )
+ --开始更新
+地方的脚本名称= 获取脚本 ()
+ --删除当前lua
+文件删除（脚本名称）
+ --使用最新数据写入新文件
+文件写入 ( 获取脚本（），LAST_LUA_DATA）
+打印 ( &#34;脚本已成功更新。再次加载。 &#34; )
+返回
+结束
+ --如果lua更新
+打印 ( &#34;已成功加载 &#34; ..当前版本（_V） .. &#34;版本 &#34; )
+ --区域GUI
+地方的抗干扰设置标签=图形用户界面选项卡（图形用户界面参考 ( &#34; Ragebot公司 &#34; ), &#34;抗干扰设置标签 &#34; , &#34;防碰撞设置选项卡 &#34; );
+ --启用部分
+地方的反激活段=图形用户界面 分组框（反设置标签， &#34;启用节 &#34; , five , ten , three hundred and twenty-five , four hundred and fifty );
+地方的启用脚本=图形用户界面复选框（反激活段， &#34;启用脚本 &#34; , &#34;启用脚本 &#34; ,真的 );
+ --模式选择器
+地方的反模式选择器=图形用户界面 分组框（反设置标签， &#34;模式 &#34; , five , one hundred , three hundred and twenty-five , four hundred and fifty );
+地方的高级模式=图形用户界面复选框（反输入模式选择器， &#34;高级模式 &#34; , &#34;高级模式 &#34; ,假 );
+ --条件选择器
+地方的反条件选择器=图形用户界面 分组框（反设置标签， &#34;条件 &#34; , five , one hundred and ninety , three hundred and twenty-five , four hundred and fifty );
+地方的条件_选择器=图形用户界面组合框（anti-aim条件选择器， &#34;条件_选择器 &#34; , &#34;选择条件 &#34; , &#34;概述 &#34; , &#34;站立 &#34; , &#34;躲避 &#34; , &#34;慢速行走 &#34; , &#34;移动 &#34; , &#34;在空中 &#34; )
+ --高级设置
+地方的反即时高级设置=图形用户界面 分组框（反设置标签， &#34;高级设置 &#34; , five , three hundred , three hundred and twenty-five , three hundred and fifty );
+地方的反阿曼名称= { &#34;一般的 &#34; , &#34;站立 &#34; , &#34;躲避 &#34; , &#34;慢速行走（_W） &#34; , &#34;移动 &#34; , &#34;空气 &#34; };
+地方的反艾姆元素= {};
+ --按所有条件创建所有元素
+地方的功能CreateAntiaimgui ()
+ --迭代反瞄准条件并为其创建指定元素
+对于要素= one , #反阿曼名称， one做
+ --gui对象的名称
+地方的 元素_变量名=anti_aim_names[元素]
+地方的元素名称=字符串.gsub ((上部串 (字符串.sub（anti_aim_names[元素]， one , one )) ..字符串.sub（anti_aim_names[元素]， two )), &#34; %_ &#34; , &#39; &#39; )
+ --创建条件数组
+如果不反元素[元素]然后
+反元素[元素]= {}
+结束
+地方的条件数组=反元素[元素]
+ --覆盖条件复选框
+condition_array。override_condition（覆盖条件）=图形用户界面复选框（反即时高级设置， &#34;override_condition（覆盖条件）_ &#34; .. 元素变量名， &#34;覆盖 &#34; ..元素名称，假 )
+ --Desync修改器
+condition_array。 取消同步类型=图形用户界面组合框（反即时高级设置， &#34; 取消同步类型_ &#34; .. 元素变量名， &#34; 取消同步类型 &#34; , &#34; 默认偏差 &#34; , &#34;Desync Jitter &#34; )
+condition_array。Desync=图形用户界面组合框（反即时高级设置， &#34;Desync &#34; .. 元素变量名， &#34;Desync编辑 &#34; ,
+ &#34;静态 &#34; , &#34;抖动 &#34; )
+condition_array。去同步范围右=图形用户界面滑块（反即时高级设置， &#34;去同步范围右_ &#34; .. 元素变量名， &#34;右去同步范围 &#34; , zero , zero , fifty-eight , one )
+condition_array。去同步范围左侧=图形用户界面滑块（反即时高级设置， &#34;去同步范围左侧_ &#34; .. 元素变量名， &#34;向左取消同步范围 &#34; , zero , zero , fifty-eight , one )
+ --偏航修改器
+condition_array。偏航_角度_右侧=图形用户界面滑块（反即时高级设置， &#34;偏航_角度_右侧_ &#34; .. 元素变量名， &#34;右偏航角 &#34; , zero , - one hundred and eighty , one hundred and eighty , one )
+condition_array。偏航角_左侧=图形用户界面滑块（反即时高级设置， &#34;偏航角_左侧_ &#34; .. 元素变量名， &#34;左偏航角 &#34; , zero , - one hundred and eighty , one hundred and eighty , one )
+condition_array。偏航修正器=图形用户界面组合框（反即时高级设置， &#34;偏航修正器_ &#34; .. 元素变量名， &#34;偏航修正器 &#34; ,
+ &#34;静态 &#34; , &#34;中心抖动 &#34; , &#34;偏移抖动 &#34; , &#34;随机抖动 &#34; , &#34;油箱抖动 &#34; , &#34;随机油箱抖动 &#34; , &#34;假Flick &#34; )
+condition_array。偏航修正器范围=图形用户界面滑块（反即时高级设置， &#34;偏航修正器范围_ &#34; .. 元素变量名， &#34;偏航修正范围 &#34; , zero , zero , one hundred and eighty , one )
+condition_array。偏航修正器速度=图形用户界面滑块（反即时高级设置， &#34;偏航修正器速度_ &#34; .. 元素变量名， &#34;偏航修正速度 &#34; , two , one point five , sixty-four , zero point five )
+结束
+结束
+ --立即调用此函数以在加载时创建gui反目标
+CreateAntiaimgui ()
+ --简单设置
+地方的反简单设置=图形用户界面 分组框（反设置标签， &#34;简单设置 &#34; , five , two hundred , three hundred and twenty-five , three hundred and fifty );
+地方的反简单设置ui=
+ {
+ 取消同步类型=图形用户界面组合框（反im_simple_settings， &#34; 取消同步类型 &#34; , &#34; 取消同步类型 &#34; , &#34; 默认偏差 &#34; , &#34;Desync Jitter &#34; ),
+ 取消同步角度（_A）=图形用户界面组合框（反im_simple_settings， &#34; 取消同步角度（_A） &#34; , &#34; 去同步角度 &#34; , &#34;残疾人 &#34; , &#34;低 &#34; , &#34; 中前期 &#34; , &#34;中等 &#34; , &#34; 高压前 &#34; , &#34;高 &#34; , &#34;巨人 &#34; ),
+抖动角度=图形用户界面组合框（反im_simple_settings， &#34;抖动角度 &#34; , &#34;抖动角度 &#34; , &#34;残疾人 &#34; , &#34;低 &#34; , &#34; 中前期 &#34; , &#34;中等 &#34; , &#34; 高压前 &#34; , &#34;高 &#34; , &#34;巨人 &#34; ),
+偏航角=图形用户界面滑块（反im_simple_settings， &#34;偏航角 &#34; , &#34;偏航角 &#34; , zero , - one hundred and eighty , one hundred and eighty , one )
+ }
+ --反目标绑定
+地方的反aim键=图形用户界面 分组框（反设置标签， &#34;绑定 &#34; , three hundred and forty , ten , two hundred and ninety , three hundred and fifty );
+地方的反aim_binds_ui=
+ {
+ --逆变器
+ 去同步转换程序=图形用户界面 钥匙盒（抗aim键， &#34; 去同步转换程序 &#34; , &#34; 设计反转 &#34; , seventy ),
+ --手册
+手动_左侧=图形用户界面 钥匙盒（抗aim键， &#34;偏航_变量.手动_左侧 &#34; , &#34;手动向左 &#34; , ninety ),
+手动_返回=图形用户界面 钥匙盒（抗aim键， &#34;偏航_变量.手动_返回 &#34; , &#34;手动后退 &#34; , eighty-eight ),
+手动_右侧=图形用户界面 钥匙盒（抗aim键， &#34;偏航_变量.手动_右侧 &#34; , &#34;手动向右 &#34; , sixty-seven ),
+手动转发=图形用户界面 钥匙盒（抗aim键， &#34;yaw_variables.manual_forward（偏航变量手动向前） &#34; , &#34;手动前进 &#34; , thirty-eight )
+ };
+ --其他设置
+地方的反安_其他=图形用户界面 分组框（反设置标签， &#34;其他 &#34; , three hundred and forty , one hundred and eighty-eight , two hundred and ninety , three hundred and fifty );
+地方的反阿曼其他用户界面=
+ {
+ -- 自动定向
+at_目标=图形用户界面复选框（抗干扰， &#34;at_目标 &#34; , &#34;目标 &#34; ,假 ),
+位于边缘（_E）=图形用户界面复选框（抗干扰， &#34;位于边缘（_E） &#34; , &#34;在边缘 &#34; ,假 ),
+反背刺=图形用户界面复选框（抗干扰， &#34;反背刺 &#34; , &#34;防倒刺 &#34; ,假 ),
+自动传送（_T）=图形用户界面复选框（抗干扰， &#34;自动传送（_T） &#34; , &#34;空中自动传送 &#34; ,假 ),
+ -- 反瞄准法
+ 合法_反非法=图形用户界面复选框（抗干扰， &#34; 合法_反非法 &#34; , &#34; 反洗钱法 &#34; ,假 ),
+ };
+ --指示器设置
+地方的反阿美指标=图形用户界面 分组框（反设置标签， &#34;指标 &#34; , three hundred and forty , four hundred and twenty-five , two hundred and ninety , three hundred and fifty );
+地方的抗aim指示符_ui=
+ {
+ --去同步侧指示器
+去同步侧面指示器=图形用户界面复选框（反阿美指标， &#34;去同步侧面指示器 &#34; , &#34;启用去同步侧指示器 &#34; ,假 ),
+手册_指示器=图形用户界面复选框（反阿美指标， &#34;手册_指示器 &#34; , &#34;启用手动指示灯 &#34; ,假 ),
+ };
+地方的desync_side_indicator颜色激活=图形用户界面 颜色选取器（抗干扰指示器ui去同步侧面指示器 , &#34;desync_side_indicator颜色激活 &#34; , &#34; &#34; , forty , forty , forty , two hundred )
+地方的去同步屏幕指示器颜色激活=图形用户界面 颜色选取器（抗干扰指示器ui去同步侧面指示器 , &#34;去同步屏幕指示器颜色激活 &#34; , &#34; &#34; , eighty-five , one hundred and twenty-five , two hundred and twenty-five , two hundred )
+地方的手册_指示器_颜色=图形用户界面 颜色选取器（抗干扰指示器ui手册_指示器 , &#34;手册_指示器_颜色 &#34; , &#34; &#34; , eighty-five , one hundred and twenty-five , two hundred and twenty-five , two hundred )
+ --愤怒设置
+地方的反安息年龄=图形用户界面 分组框（反设置标签， &#34;愤怒 &#34; , three hundred and forty , five hundred and fifty-five , two hundred and ninety , three hundred and fifty );
+地方的反阿姆年龄用户界面=
+ {
+ --利用
+双重点火=图形用户界面复选框（反安息年龄， &#34;双重点火 &#34; , &#34;双重火力 &#34; ,假 ),
+隐藏快照=图形用户界面复选框（反安息年龄， &#34;隐藏快照 &#34; , &#34;隐藏快照 &#34; ,假 )
+ };
+ --configs，脚本底部的按钮
+地方的反im配置标签=图形用户界面选项卡（图形用户界面参考 ( &#34; Ragebot公司 &#34; ), &#34;反im配置标签 &#34; , &#34;反攻击配置选项卡 &#34; );
+ -- Endregion（结束区域）
+ --区域EDIT_GUI
+ --只是一个在某些情况下控制gui可见性的函数
+地方的高级模式启用；
+地方的功能 更改Gui ()
+ --更改反目标类型
+反即时高级设置： 设置不可见 (不高级模式启用）
+反条件选择器： 设置不可见 (不高级模式启用）
+anti_aim_simple_settings： 设置不可见（高级模式已启用）
+ --使非选定图元不可见
+对于条件= one , #反元素， one做
+ --迭代条件中的所有元素
+对于_，元素在里面对（反元素[条件]）做
+如果（条件_选择器： 方法 ()+ one )然后
+元素： 设置不可见（（条件_选择器： 方法 ()+ one )~=条件）
+结束
+结束
+结束
+反艾姆元素[ one ].override_condition（覆盖条件） : 设置不可见 (真的 )
+ --检查脚本启用
+反模式选择器： 设置已禁用 (不启用脚本（_S）： 方法 ())
+反条件选择器： 设置已禁用 (不启用脚本（_S）： 方法 ())
+反即时页面（_aim_rage）： 设置已禁用 (不启用脚本（_S）： 方法 ())
+抗干扰指标： 设置已禁用 (不启用脚本（_S）： 方法 ())
+抗干扰： 设置已禁用 (不启用脚本（_S）： 方法 ())
+抗aim_binds： 设置已禁用 (不启用脚本（_S）： 方法 ())
+anti_aim_simple_settings： 设置已禁用 (不启用脚本（_S）： 方法 ())
+反即时高级设置： 设置已禁用 (不启用脚本（_S）： 方法 ())
+结束
+ -- Endregion（结束区域）
+ --区域处理
+ --返回本地球员状态，如移动、空中等。
+地方的本地实体；
+地方的常数= {}
+地方的反即时条件类型= {}
+anti_aim_conditions_types。概述= one
+anti_aim_conditions_types。站立= two
+anti_aim_conditions_types。鸭子= three
+anti_aim_conditions_types。慢速行走= four
+anti_aim_conditions_types。移动= five
+anti_aim_conditions_types。输入_AIR= six
+常数 FL_环形=位 l移位 ( one , zero )
+常数FL_挖掘=位 l移位 ( one , one )
+常数标准_ ELOCITY_螺纹= ten
+地方的功能 获取反瞄准条件 ()
+ --如果localeentity无效，则返回general
+如果不本地实体（_E）或不本地实体（_E）： IsAlive（激活） ()然后
+返回anti_aim_conditions_types。概述
+结束
+ --localeentity的有用数据
+地方的标记（_F）=本地实体（_E）：获取道具 ( &#34;m_f标记 &#34; )
+地方的速度=本地实体（_E）： 获取属性向量 ( &#34; 本地数据 &#34; , &#34; m_vecVelocity[0] &#34; ):长度 ()
+地方的slow_walk_active（慢速行走活动）=图形用户界面 方法 ( &#34;rbot.精度.移动.快捷键 &#34; )~= zero和输入 IsButton向下（图形用户界面 方法 ( &#34;rbot.精度.移动.快捷键 &#34; ))
+ --m_flags位置基于位运算符
+地方的空中（_A）=（（位乐队（m_flags，常量。 FL_环形 ))== zero )
+地方的躲避=（（位乐队（m_flags，常量。FL_挖掘 ))== two )
+ --获取反瞄准条件
+如果（速度<=常数标准_ ELOCITY_螺纹 )和不躲避和不空中（_A）
+和anti_aim_elements[反aim_conditions_types。站立 ].override_condition（覆盖条件） : 方法 ()然后
+返回anti_aim_conditions_types。站立
+ 其他（俯身或作弊 IsFakeDucking公司 ())和不空中（_A）
+和anti_aim_elements[反aim_conditions_types。鸭子 ].override_condition（覆盖条件） : 方法 ()然后
+返回anti_aim_conditions_types。鸭子
+ 其他（速度 &#62;常数标准_ ELOCITY_螺纹 )和slow_walk_active（慢速行走活动）和不躲避和不空中（_A）
+和anti_aim_elements[反aim_conditions_types。慢速行走 ].override_condition（覆盖条件） : 方法 ()然后
+返回anti_aim_conditions_types。慢速行走
+ 其他（速度 &#62;常数标准_ ELOCITY_螺纹 )和不slow_walk_active（慢速行走活动）和不躲避和不空中（_A）
+和anti_aim_elements[反aim_conditions_types。移动 ].override_condition（覆盖条件） : 方法 ()然后
+返回anti_aim_conditions_types。移动
+ 其他空中（_A）
+和anti_aim_elements[反aim_conditions_types。输入_AIR ].override_condition（覆盖条件） : 方法 ()然后
+返回anti_aim_conditions_types。输入_AIR
+结束
+ --如果其他条件不匹配，则返回general
+返回anti_aim_conditions_types。概述
+结束
+ --函数，处理所有常用变量
+地方的实时、反即时条件、侧开关延迟、应开关、假滞后因素= 全球的实时（），anti_aim_conditions_types。概述 , two ,假 , zero ;
+地方的当前武器组= &#34;共享 &#34;
+地方的模式=
+ {
+ &#34;%秒 &#34; ;
+ &#34;汽车 &#34; ;
+ &#34;lightmachinegun &#34; ;
+ &#34;冲锋枪 &#34; ;
+ &#34; 重型火炮 &#34; ;
+ }
+地方的替换=
+ {
+ &#34; &#34; ;
+ &#34;一 &#34; ;
+ &#34; 1毫克 &#34; ;
+ &#34;Smg公司 &#34; ;
+ &#34; hpistol公司 &#34; ;
+ }
+地方的 cmd发送数据包=假
+地方的上次切换时间= zero ;
+地方的功能 handleVariables（处理变量） ()
+ --本地数据
+本地实体（_E）=实体 获取本地播放器 ()
+ --武器组
+当前武器组=下线 (字符串.gsub（图形用户界面 方法 ( &#34;rbot.hitscan.精确度 &#34; ), &#39; &#34; &#39; , &#34; &#34; ))
+对于我= one , #模式做
+当前武器组=字符串.gsub（当前武器组，模式[i]，替换[i]）
+结束
+ --反目标
+反阿米条件= 获取反瞄准条件 ()
+高级模式已启用=高级模式： 方法 ()
+fake_lag_因素=图形用户界面 方法 ( &#34;其他.fakelag.enable &#34; )和图形用户界面 方法 ( &#34;杂项假因素 &#34; )或anti _ aim _ elements[反aim _ condition]。偏航修正器速度 : 方法 ()
+ --时间
+实时（_T）= 全球的实时 ()
+ --侧开关延迟
+侧开关延迟=（（图形用户界面 方法 ( &#34;碳准确度攻击共享火灾 &#34; )== &#39;“防御曲火” &#39;或图形用户界面 方法 ( &#34;准确度攻击 &#34; ..当前武器组 .. &#34;.火灾 &#34; )== &#39;“防御曲火” &#39; )
+或（图形用户界面 方法 ( &#34;碳准确度攻击共享火灾 &#34; )== &#39;“轮班开火” &#39;或图形用户界面 方法 ( &#34;准确度攻击 &#34; ..当前武器组 .. &#34;.火灾 &#34; )== &#39;“轮班开火” &#39; ))
+和anti _ aim _ elements[反aim _ condition]。偏航修正器速度 : 方法 ()或fake_lag_因素
+ --如果抖动速度为1，则不检查延迟
+应该_开关=（实时（_T） -上次切换时间>=（侧开关延迟 *常数勾选_时间 )和 cmd发送数据包）
+结束
+ -- Endregion（结束区域）
