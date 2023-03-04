@@ -1,0 +1,9 @@
+version="2.0.*"
+tags={
+	"Translation"
+	"Sound"
+}
+name="陌上花开，可缓缓归矣。"
+picture="thumbnail.png"
+supported_version="3.6.*"
+remote_file_id="2748042160"
